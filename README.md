@@ -1,2 +1,2 @@
 # PacMan
- My 1st game in GOlang ^_^
+ My 1st game in Golang ^_^
