@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"os"
 	"time"
-
-	tm "github.com/buger/goterm"
 )
 
 type pos struct {
@@ -96,16 +94,9 @@ func draw() {
 		}
 		buf.WriteString("\n")
 	}
-	// Create Box with 30% width of current screen, and height of 20 lines
-	box := tm.NewBox(30|tm.PCT, 20, 0)
-
-	// Add some content to the box
-	// Note that you can add ANY content, even tables
-	fmt.Fprint(box, buf.String())
-
-	// Move Box to approx center of the screen
-	tm.Print(tm.MoveTo(box.String(), 40|tm.PCT, 40|tm.PCT))
-
+	fmt.Print("\033[H\033[1:1H")
+	fmt.Print(buf.String())
+	buf.Reset()
 }
 
 func main() {
@@ -113,11 +104,8 @@ func main() {
 	start()
 	makeGrid()
 	go input()
-	tm.Clear() // Clear current screen
-	for {
-		tm.MoveCursor(1, 1)
-		tm.Flush()
 
+	for {
 		update()
 		draw()
 		time.Sleep(time.Millisecond * 17)
