@@ -96,7 +96,16 @@ func draw() {
 		}
 		buf.WriteString("\n")
 	}
-	fmt.Print(buf.String())
+	// Create Box with 30% width of current screen, and height of 20 lines
+	box := tm.NewBox(30|tm.PCT, 20, 0)
+
+	// Add some content to the box
+	// Note that you can add ANY content, even tables
+	fmt.Fprint(box, buf.String())
+
+	// Move Box to approx center of the screen
+	tm.Print(tm.MoveTo(box.String(), 40|tm.PCT, 40|tm.PCT))
+
 }
 
 func main() {
@@ -108,6 +117,7 @@ func main() {
 	for {
 		tm.MoveCursor(1, 1)
 		tm.Flush()
+
 		update()
 		draw()
 		time.Sleep(time.Millisecond * 17)
