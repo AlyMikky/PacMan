@@ -1,5 +1,6 @@
 # PacMan
- My 1st game in Golang ^_^
+ ASCII/Unicode Pac-Man game in the terminal in Golang!
  
-![image](https://github.com/AlyMikky/PacMan/assets/49216308/bf92b185-65f5-49a9-96eb-2cf70ff21734)
+![image](https://github.com/AlyMikky/PacMan/assets/49216308/f8214ce8-d4a4-4176-88f3-13fd7bdecf52)
+
 
