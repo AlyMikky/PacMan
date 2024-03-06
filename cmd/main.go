@@ -153,7 +153,6 @@ func input(wg *sync.WaitGroup) {
 			continue
 		}
 	}
-
 }
 
 func update(wg *sync.WaitGroup) {
@@ -174,9 +173,17 @@ func update(wg *sync.WaitGroup) {
 }
 
 func draw(wg *sync.WaitGroup) {
+
+	ticker := time.NewTicker(17 * time.Millisecond)
 	defer wg.Done()
-	for {
+	defer ticker.Stop()
+
+	t2 := time.Now()
+
+	for range ticker.C {
+
 		buf := new(bytes.Buffer)
+		buf.WriteString(fmt.Sprintf("FPS: %d \n", 1000/(time.Since(t2).Milliseconds())))
 		for i := 0; i < 31; i++ {
 			for j := 0; j < 28; j++ {
 				buf.WriteString(string(grid[i][j]))
@@ -185,7 +192,7 @@ func draw(wg *sync.WaitGroup) {
 		}
 		buf.WriteString("\033[H\033[1:1H")
 		buf.WriteTo(os.Stdout)
-		time.Sleep(time.Millisecond * 17)
+		t2 = time.Now()
 	}
 }
 
